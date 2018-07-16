@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_filter( 'wp_mail_from', 'ntpd_wp_mail_from' );
+add_filter( 'wp_mail_from_name', 'ntpd_wp_mail_from_name' );
 
 /**
  * Modifies 'from' email address
@@ -40,9 +41,6 @@ add_filter( 'wp_mail_from', 'ntpd_wp_mail_from' );
  * @return string
  */
 function ntpd_wp_mail_from( $original_email_address ) {
-	//Make sure the email is from the same domain 
-	//as your website to avoid being marked as spam.
-	
 	return 'info@' . $_SERVER['SERVER_NAME'];
 }
 
@@ -52,7 +50,6 @@ function ntpd_wp_mail_from( $original_email_address ) {
  * @param string $original_email_from
  * @return string
  */
-add_filter( 'wp_mail_from_name', 'ntpd_wp_mail_from_name' );
 function ntpd_wp_mail_from_name( $original_email_from ) {
 	return get_bloginfo( 'name' );
 }
